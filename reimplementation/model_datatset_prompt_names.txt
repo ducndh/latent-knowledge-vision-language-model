@@ -1,3 +1,0 @@
-model_list=['meta-llama/Llama-3.2-3B-Instruct','Qwen/Qwen2.5-3B-Instruct']
-dataset_list=['imdb','amazon_polarity','ag_news','dbpedia_14','multi_nli',["glue","qnli"],"gimmaru/story_cloze-2016","piqa"]
-prompt_list=['imdb','amazon_polarity','ag_news','dbpedia_14','multi_nli',["glue","qnli"],"story_cloze/2016","piqa"]
