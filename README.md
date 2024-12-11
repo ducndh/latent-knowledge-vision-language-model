@@ -4,6 +4,7 @@ Using representation engineer to understand and reduce hallucination in large vi
 
 
 ###################Junli's part
+
 In the LLM reimplementation part, we tested CCS on every layer of LLama-3.2 (instruct and base version) Qwen-2.5 (instruct and base version). 
 
 Compare to the original code, main modifications are made to utils.get_individual_hidden_states, utils.get_dataloader, utils.ContrastDataset
