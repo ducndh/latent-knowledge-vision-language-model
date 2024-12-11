@@ -1,0 +1,82 @@
+```{r}
+options(conflicts.policy = "depends.ok") 
+library(tidyverse)
+library(broom)
+library(skimr)
+library(car, exclude = c("recode", "some")) 
+library(ggpubr)
+library(ggplot2)
+library(dplyr)
+library(readr)
+library(GGally)
+library(snakecase)
+theme_set(theme_classic()) 
+path_data <- here::here(getwd())
+
+d <- read_csv(here::here( path_data,"experiment data/logtis_full.csv"))
+```
+
+```{r}
+#statistical test
+m=lm(data=d,diff_logi~1+label)
+summary(m)
+```
+```{r}
+#density plot
+d$label=as.factor(d$label)
+p2=ggplot(d,aes(x=diff_logi, fill=label))+
+  geom_histogram(alpha=0.2, position="identity")+
+  scale_fill_discrete(labels=c('question with hallucination', 'question without hallucination'))
+```
+```{r}
+#bar plot
+d_sum=d |> 
+  group_by(label) |> summarise(mean_diff_logi=mean(diff_logi),sd_diff_logi=sd(diff_logi))
+```
+```{r}
+#bar plot
+p1=ggplot(d_sum) +
+  geom_bar(aes(x = label, y = mean_diff_logi,fill=label),stat = "identity", width = 0.6) +   # Bar plot
+  geom_errorbar(aes(x= label, ymin = mean_diff_logi - sd_diff_logi, ymax = mean_diff_logi + sd_diff_logi), width = 0.2) +  # Error bars
+  labs(x = "If hallucination", y = "Mean difference of logits") +  # Labels
+  scale_fill_discrete(labels=c('question with hallucination', 'question without hallucination'))+
+  theme_minimal()
+```
+```{r}
+ggarrange(p1,p2,ncol=2,nrow=1)
+```
+
+
+```{r}
+# CCS data
+d <- read_csv(here::here( path_data,"experiment data/POPE_llava_CCS.csv"))
+
+```
+
+```{r}
+# line plot
+d <- d|>rowwise() |>mutate(mean_logi=mean(c(Logi0,Logi1, Logi2,Logi3,Logi4)))
+d <- d|>rowwise() |>mutate(mean_CCS=mean(c(CCS0,CCS1, CCS2,CCS3,CCS4)))
+
+d <- d|>rowwise() |>mutate(se_logi=sd(c(Logi0,Logi1, Logi2,Logi3,Logi4))/sqrt(5))
+d <- d|>rowwise() |>mutate(se_CCS=sd(c(CCS0,CCS1, CCS2,CCS3,CCS4))/sqrt(5))
+
+d1=data.frame(layer=d$layer,mean_logi=d$mean_logi,mean_ccs=d$mean_CCS,SE_logi=d$se_logi,SE_ccs=d$se_CCS)
+```
+```{r}
+long_data <- d1 %>%
+  pivot_longer(
+    cols = -layer,       # Select all columns to pivot
+    names_to = c(".value", "method"),
+    names_pattern = "(mean|SE)_(logi|ccs)"
+  )
+```
+
+
+```{r}
+ggplot(long_data, aes(x=layer, y=mean, colour=method)) + 
+    geom_errorbar(aes(ymin=mean-SE, ymax=mean+SE), width=.1) +
+    geom_line() +
+    geom_point()
+```
+
