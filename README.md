@@ -1,13 +1,23 @@
-# latent-knowledge-vision-language-model
-Using representation engineer to understand and reduce hallucination in large vision language model
+# Toward Understanding Hallucinations through Latent Knowledge
+
+[Paper Link](https://www.overleaf.com/project/675795a7465199b27c6dc18d)
+
+This is a Repository of all the Experiements conducted to gather more deep understanding into Extraction of Latent Knowledge by Using a particular technique of Contrast Consistent Search
+
+The Study can be Segmented into the following Categories
+- Reimplementation of the Paper that isnpired this project. [Burns et al](https://arxiv.org/pdf/2212.03827)
+- Pilot Study on Vision Language models and Analysis of POPE Dataset (VLM_Pilot_Study.ipynb)
+- Extension of CCS in Vision-Language Models (VLM_CCS Experiment)
+- Contrastive Study design between Performance of Base model Vs CCS on CLIP and LLaVa 1.5B (CCL_CLIP_LLaVa.ipynb)
 
 
+### Running the Code
+All the `.ipynb` files can be run as is, it includes all the dependencies that need to be installed and are plug and play.
 
-###################Junli's part
 
 In the LLM reimplementation part, we tested CCS on every layer of LLama-3.2 (instruct and base version) Qwen-2.5 (instruct and base version). 
 
-Compare to the original code, main modifications are made to utils.get_individual_hidden_states, utils.get_dataloader, utils.ContrastDataset
+Compare to the original code, main modifications are made to `utils.get_individual_hidden_states, utils.get_dataloader, utils.ContrastDataset`
 
 There is some difference of how to handel multi-label dataset. Because the original paper didn't mention their method, here we convert the multi-label question to binary question with answer "Yes" or "No". In detail, for a multi-answer question, we randomly assign "yes" or "no" category to it. For "yes" category, the correct answer is yes, which means we conbine the true answer to the question.  For "no" category, the correct answer is no, which means we conbine a random wrong answer to the question. 
 
