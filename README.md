@@ -93,13 +93,13 @@ python VLM_hallucination/evaluate.py --dataset_name lmms-lab/POPE default --save
 python VLM_hallucination/VLM_truth_pair_generate.py --dataset_name lmms-lab/POPE default --save_hidden_dir []
 ```
 
-4.1 To save hallucination CCS, please run:
+  4.1 To save hallucination CCS, please run:
 
 ```bash
 python VLM_hallucination/evaluate_save_probe.py --save_hidden_dir [] --save_probe_dir []
 ```
 
-4.2 To test the truth contrast pair on the hallucination CCS, please run:
+  4.2 To test the truth contrast pair on the hallucination CCS, please run:
 
 ```bash
 python VLM_hallucination/evaluate_load_probe.py --save_hidden_dir [] --save_probe_dir []
