@@ -25,8 +25,8 @@ def main(args):
     results={"pos_hidden":all_hidden_pos,"neg_hidden":all_hidden_neg,"all_ans":all_ans,
              "all_id":all_id,"all_category":all_category}
     
-    if not os.path.exists(args.save_truth_hidden_dir):
-        os.makedirs(args.save_truth_hidden_dir)
+    if not os.path.exists(args.save_hidden_dir):
+        os.makedirs(args.save_hidden_dir)
     torch.save(results, os.path.join(args.save_truth_hidden_dir,'POPE_truth_hidden.pt'))
      
 if __name__ == "__main__":
