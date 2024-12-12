@@ -87,6 +87,26 @@ python VLM_hallucination/VLM_hallucination_pair_generate.py --dataset_name lmms-
 python VLM_hallucination/evaluate.py --dataset_name lmms-lab/POPE default --save_hidden_dir []
 ```
 
+4. To construct truth contrast pair for POPE and save the hidden embeddings, Please run:
+
+```bash
+python VLM_hallucination/VLM_truth_pair_generate.py --dataset_name lmms-lab/POPE default --save_hidden_dir []
+```
+
+4.1 To save hallucination CCS, please run:
+
+```bash
+python VLM_hallucination/evaluate_save_probe.py --save_hidden_dir [] --save_probe_dir []
+```
+
+4.2 To test the truth contrast pair on the hallucination CCS, please run:
+
+```bash
+python VLM_hallucination/evaluate_load_probe.py --save_hidden_dir [] --save_probe_dir []
+```
+
+
+
 ### Contrastive Study design between Performance of Base model Vs CCS on CLIP and LLaVa 1.5B Using the Contrast pair Questions
 #### Running the Code
 >All the `.ipynb` files can be run as is, it includes all the dependencies that need to be installed and are plug and play.
