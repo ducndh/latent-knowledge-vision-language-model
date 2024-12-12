@@ -9,6 +9,7 @@ The Study can be Segmented into the following Categories
 - Pilot Study on Vision Language models and Analysis of POPE Dataset [Code](VLM_Pilot_Study.ipynb)
 - Extension of CCS in Vision-Language Models [Folder](/VLM_hallucination/)
 - Contrastive Study design between Performance of Base model Vs CCS on CLIP and LLaVa 1.5B [Code](CCS_CLIP_LLaVa.ipynb)
+- Validating the Robustness of CCS by Conducting a study on Text Transfer and Adversarial Robustness [Code](TextTransferAndAdversarialStudy.ipynb)
 
 
 ## Prerequisites
