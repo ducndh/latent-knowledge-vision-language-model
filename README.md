@@ -36,7 +36,7 @@ Prompt: ['imdb','amazon_polarity','ag_news','dbpedia_14','multi_nli',["glue","qn
 3. code for ploting is in LLM_reimplementation/plot.py
 
 
-### Pilot Study on Vison Language models and Analysis of POPE Dataset
+### Pilot Study on Vison Language models and Analysis of POPE Dataset + Contrastive Study design between Performance of Base model Vs CCS on CLIP and LLaVa 1.5B
 #### Running the Code
 All the `.ipynb` files can be run as is, it includes all the dependencies that need to be installed and are plug and play.
 
