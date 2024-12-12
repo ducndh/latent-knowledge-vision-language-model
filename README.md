@@ -91,4 +91,7 @@ python VLM_hallucination/evaluate.py --dataset_name lmms-lab/POPE default --save
 #### Running the Code
 >All the `.ipynb` files can be run as is, it includes all the dependencies that need to be installed and are plug and play.
 
+###Validating the Robustness of CCS by Conducting a study on Text Transfer and Adversarial Robustness
+#### Running the Code
+>All the `.ipynb` files can be run as is, it includes all the dependencies that need to be installed and are plug and play.
 
