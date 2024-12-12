@@ -35,10 +35,17 @@ Prompt: ['imdb','amazon_polarity','ag_news','dbpedia_14','multi_nli',["glue","qn
 
 3. code for ploting is in LLM_reimplementation/plot.py
 
+Running environment is in `requirements.txt`
+
+
 
 ### Pilot Study on Vison Language models and Analysis of POPE Dataset + Contrastive Study design between Performance of Base model Vs CCS on CLIP and LLaVa 1.5B
 #### Running the Code
 All the `.ipynb` files can be run as is, it includes all the dependencies that need to be installed and are plug and play.
+
+
+
+
 
 
 ### Extension of CCS in Vision-Language Models 
@@ -57,3 +64,5 @@ In the VLM_hallucination part, we studied the hallucination problem using LLaVa-
 3. After we get the hidden embedding, we test CCS's performance as a hallucination classifier. Please run:
 
 `python VLM_hallucination/evaluate.py --dataset_name lmms-lab/POPE default --save_hidden_dir []`
+
+Running environment is in `requirements.txt`
