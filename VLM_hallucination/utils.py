@@ -38,8 +38,8 @@ def get_parser():
     parser.add_argument("--max_new_tokens", type=int, default=1, help="Number of max generated tokens")
     parser.add_argument("--save_logits_dir", type=str, default=None, help="dir of logits and label file")
     parser.add_argument("--save_hidden_dir", type=str, default=None, help="dir of hidden embedding file")
-    parser.add_argument("--save_truth_hidden_dir", type=str, default=None, help="dir of truth contrast pair hidden embedding file")
-    
+    #parser.add_argument("--save_truth_hidden_dir", type=str, default=None, help="dir of truth contrast pair hidden embedding file")
+    parser.add_argument("--save_probe_dir", type=str, default=None, help="dir of ccs probe weight file")
     #parser.add_argument("--file_dir", type=str, default='experiment data/POPE_truth_hidden_results_full.pt')
     #parser.add_argument("--repeat_times", type=int, default=1, help="Number of repeating times for every sample")
     
@@ -361,13 +361,7 @@ def get_all_answer(model, dataset, processor,args):
 
 
 def get_all_hidden(model, dataset, processor,args):
-    """
-    Given a model, a tokenizer, and a dataloader, returns the hidden states (corresponding to a given position index) in all layers for all examples in the dataloader,
-    along with the average log probs corresponding to the answer tokens
 
-    The dataloader should correspond to examples *with a candidate label already added* to each example.
-    E.g. this function should be used for "Q: Is 2+2=5? A: True" or "Q: Is 2+2=5? A: False", but NOT for "Q: Is 2+2=5? A: ".
-    """
     all_hidden_h = []
     all_hidden_t = []
     all_ans_h = []
@@ -429,13 +423,7 @@ def get_all_hidden(model, dataset, processor,args):
     return all_hidden_h, all_hidden_t,all_ans_h,all_ans_t,all_id_h,all_id_t,all_category_h,all_category_t
 
 def get_all_hidden_truth(model, dataset, processor,args):
-    """
-    Given a model, a tokenizer, and a dataloader, returns the hidden states (corresponding to a given position index) in all layers for all examples in the dataloader,
-    along with the average log probs corresponding to the answer tokens
 
-    The dataloader should correspond to examples *with a candidate label already added* to each example.
-    E.g. this function should be used for "Q: Is 2+2=5? A: True" or "Q: Is 2+2=5? A: False", but NOT for "Q: Is 2+2=5? A: ".
-    """
     all_hidden_pos = []
     all_hidden_neg = []
     all_ans = []
@@ -518,7 +506,7 @@ def load_single_generation(args, generation_type="hidden_states"):
     
     return data
 
-def load_all_generations(args):
+def load_all_generations_truth(args):
     # load all the saved generations: neg_hs, pos_hs, and labels
     
     data=torch.load(args.save_hidden_dir)
@@ -529,6 +517,15 @@ def load_all_generations(args):
     y = data['all_ans']
     return neg_hs, pos_hs ,y
 
+def load_all_generations_hallu(args):
+    # load all the saved generations: neg_hs, pos_hs, and labels
+    
+    data=torch.load(args.save_hidden_dir)
+    neg_hs = data['hallucination_hidden']
+    #neg_hs=neg_hs.squeeze(1)
+    pos_hs = data['normal_hidden']
+    #pos_hs=pos_hs.squeeze(1)
+    return neg_hs, pos_hs
 
 class MLPProbe(nn.Module):
     def __init__(self, d):
